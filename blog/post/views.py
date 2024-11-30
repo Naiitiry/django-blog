@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -30,7 +30,7 @@ def register(request):
         messages.success(request,'Usuario registrado con éxito.')
     return render(request,'register.html')
 
-def login(request):
+def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -40,8 +40,12 @@ def login(request):
         if user is not None:
             login(request,user)
             return  redirect('index')
+        else:
+            messages.error(request,'Credenciales inválidas.')
+            return redirect('login')
+    return render(request,'login.html')
 
 
 @login_required
 def index(request):
-    return render(request,'post/index.html',{})
+    return render(request,'index.html',{})
