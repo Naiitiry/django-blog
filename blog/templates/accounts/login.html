@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %}Iniciar sesión{% endblock %}
+
+{% block 'content' %}
+
+    <h1>Iniciar sesión</h1>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Usuario">
+        <input type="password" name="password" placeholder="Contraseña">
+        <button type="submit">Iniciar sesión</button>
+    </form>
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endblock %}

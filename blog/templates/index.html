@@ -1,5 +1,12 @@
 {% extends 'layout/base.html' %}
 
+{% block 'title' %}Inicio{% endblock %}
+
 {% block 'content' %}
-    <h1>Welcome to summoner rift</h1>
+    <h1>Bienvenido</h1>
+    <p>Por favor elija una opción</p>
+    <div class="cards">
+        <a href="{%  url 'login' %}">Iniciar sesión</a>
+        <a href="{% url 'register' %}">Registrarse</a>
+    </div>
 {% endblock %}
