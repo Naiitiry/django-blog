@@ -3,8 +3,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from .models import Post
 
 
 @login_required
 def index(request):
-    return render(request,'index.html',{})
+    return render(request,'post/post_index.html',{})

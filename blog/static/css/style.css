@@ -1,0 +1,42 @@
+:root{
+    --color-primary:#fbe9e7 ;
+    --color-secondary:#876533;
+    --color-tertiary:#ff1100;
+    --font-main: serif;
+    --font-text:'Courier New', Courier, monospace;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:var(--font-text)
+}
+
+/* SELECTORES */
+
+h1,h2,h3,h4,h5,h6{
+    font-family: var(--font-main);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 50px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+input{
+    outline: none;
+    box-shadow: none;
+    border: 1px solid var(--color-tertiary);
+}
+
+form{
+    background-color: var(--color-primary);
+}
+.form-table{
+    list-style: none;
+}

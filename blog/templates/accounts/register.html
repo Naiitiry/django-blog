@@ -1,8 +1,21 @@
-<form action="{% url 'register' %}" method="POST">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Nombre de usuario" required>
-    <input type="email" name="email" placeholder="Correo electrónico" required>
-    <input type="password" name="password" placeholder="Contraseña" required>
-    <input type="password" name="confirm_password" placeholder="Confirmar Contraseña" required>
-    <button type="submit">Registrarse</button>
-</form>
+{% extends 'layout/session/base_session.html' %}
+
+{% block 'title' %}Registrarse{% endblock %}
+
+{% block 'content' %}
+    <h1>Registrarse</h1>
+    <form action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <table class="form-table">
+            {{form.as_table}}
+        </table>
+        <button type="submit">Registrarse</button>
+    </form>
+
+    <p>Ya tieenes una cuenta? <a href="{% url 'login' %}">Login</a></p>
+
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+
+{% endblock %}
