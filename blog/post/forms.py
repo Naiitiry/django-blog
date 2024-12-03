@@ -4,7 +4,7 @@ from .models import Post, Comment, Category, Tag
 class PostForm(ModelForm):
     class Meta:
         model=Post
-        exclude=('created_at','updated_at',)
+        fields=['title','description','category']
 
 class CommentForm(ModelForm):
     class Meta:

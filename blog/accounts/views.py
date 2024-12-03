@@ -17,7 +17,7 @@ def register_user(request):
         if form.is_valid():
             form.save()
             messages.success(request,'Usuario registrado con éxito.')
-            return redirect('index')#redirige a la página principal/index.
+            return redirect('login')#redirige a la página principal/index.
         """
         username = request.POST['username']
         email = request.POST['email']

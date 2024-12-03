@@ -1,0 +1,15 @@
+{% extends 'layout/base.html' %}
+
+{% block 'content' %}
+    <h1>Detalles de {{post.title}}</h1>
+    <span><a href="{% url 'post_index' %}">Volver atrás</a></span>
+    <ul>
+        <li>{{post.title}}</li>
+        <li>{{post.description}}</li>
+        <li>{{post.created_at}}</li>
+        <li>{{post.updated_at}}</li>
+        <li>{{post.user.username}}</li>
+        <li>{{post.category.name}}</li>
+    </ul>
+    
+{% endblock %}

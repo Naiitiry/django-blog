@@ -1,7 +1,7 @@
 :root{
     --color-primary:#fbe9e7 ;
     --color-secondary:#876533;
-    --color-tertiary:#ff1100;
+    --color-tertiary:#ff8800;
     --font-main: serif;
     --font-text:'Courier New', Courier, monospace;
 }
@@ -27,7 +27,9 @@ main{
     justify-content: flex-start;
     align-items: center;
 }
-
+nav{
+    background-color: var(--color-tertiary);
+}
 input{
     outline: none;
     box-shadow: none;

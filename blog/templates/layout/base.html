@@ -9,11 +9,15 @@
     {% block 'style' %}{% endblock %}
 </head>
 <body>
-    {% include 'layout/partials/menu.html' %}
+    <header>
+        {% include 'layout/partials/menu.html' %}
+    </header>
     <main>
         {% block 'content' %}
         {% endblock %}
     </main>
-
+    <footer>
+        
+    </footer>
 </body>
 </html>

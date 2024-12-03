@@ -1,6 +1,4 @@
 from django.db import models
-
-from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
 
@@ -16,6 +14,7 @@ class Post(models.Model):
     description=models.TextField(null=False,blank=False)
     created_at=models.DateField(auto_now_add=True)
     updated_at=models.DateField(auto_now=True)
+    is_deleted = models.BooleanField(default=False)
     
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='posts')
@@ -26,7 +25,7 @@ class Post(models.Model):
 class Comment(models.Model):
     comment=models.TextField(null=False,blank=False)
     comment_date=models.DateField(default=date.today)
-
+    is_deleted = models.BooleanField(default=False)
 
     post=models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='comments')
