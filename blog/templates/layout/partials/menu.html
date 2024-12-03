@@ -8,10 +8,9 @@
     <div>
         <h1>Título</h1>
     </div>
-    <div>
-        Ícono de usuario
-        <button>
-            <a href="{% url 'logout' %}">Desconectar</a>
-        </button>
+    <div class="dropdown">
+        <a href="#">Información</a>
+        <a href="#">Dashboard</a>
+        <a href="{% url 'logout' %}">Desconectar</a>
     </div>
 </nav>
