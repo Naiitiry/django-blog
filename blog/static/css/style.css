@@ -26,7 +26,6 @@ main{
     padding: 50px;
     justify-content: flex-start;
     align-items: center;
-    background-color: aquamarine;
 }
 nav{
     background-color: var(--color-secondary);
@@ -40,17 +39,14 @@ input{
 }
 
 form{
-    background-color: var(--color-tertiary);
+    background-color: #876533;
     padding: 15px;
-}
-.form-register{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 .form-table{
     list-style: none;
+    width: 100%;
 }
 .btn-send{
     width: 100%;
@@ -64,5 +60,4 @@ form{
 .btn-send:hover{
     background-color: white;
     color: var(--color-secondary);
-    border: 1px solid var(--color-primary);
 }
