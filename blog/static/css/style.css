@@ -26,19 +26,43 @@ main{
     padding: 50px;
     justify-content: flex-start;
     align-items: center;
+    background-color: aquamarine;
 }
 nav{
-    background-color: var(--color-tertiary);
+    background-color: var(--color-secondary);
 }
 input{
     outline: none;
     box-shadow: none;
     border: 1px solid var(--color-tertiary);
+    padding: 5px;
+    width: 100%;
 }
 
 form{
-    background-color: var(--color-primary);
+    background-color: var(--color-tertiary);
+    padding: 15px;
+}
+.form-register{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .form-table{
     list-style: none;
+}
+.btn-send{
+    width: 100%;
+    padding: 10px;
+    background-color: var(--color-secondary);
+    color: white;
+    border: 0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn-send:hover{
+    background-color: white;
+    color: var(--color-secondary);
+    border: 1px solid var(--color-primary);
 }

@@ -1,18 +1,18 @@
-{% extends 'layout/session/base_session.html' %}
+{% extends 'layout/base_session.html' %}
 
 {% block 'title' %}Registrarse{% endblock %}
 
 {% block 'content' %}
     <h1>Registrarse</h1>
-    <form action="{% url 'register' %}" method="POST">
+    <form action="{% url 'register' %}" method="POST" class="form-register">
         {% csrf_token %}
         <table class="form-table">
             {{form.as_table}}
         </table>
-        <button type="submit">Registrarse</button>
+        <button type="submit" class="btn-send">Registrarse</button>
     </form>
 
-    <p>Ya tieenes una cuenta? <a href="{% url 'login' %}">Login</a></p>
+    <p>Ya tienes una cuenta? <a href="{% url 'login' %}">Login</a></p>
 
     {% for message in messages %}
         <p>{{ message }}</p>
