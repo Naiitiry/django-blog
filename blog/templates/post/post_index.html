@@ -3,22 +3,36 @@
 {% block 'content' %}
     <h1>Publicaciones</h1>
     {% include 'post/partials/search.html' %}
-    <span><a href="{% url 'post_index' %}">Ver todos</a> <a href="{% url 'post_create' %}">Nuevo post</a></span>
-    <div>
-        {% if posts %}
-            <ul>
-                {% for post in posts %}
-                    <li>
-                        <h2>{{post.title}}</h2>
-                        <p>{{post.description|truncatechars:20}}</p>
-                        <span>
-                            <a href="{% url 'post_view' id=post.id%}">Ver</a>
-                        </span>
-                    </li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <h2>Nada por aquí aún, sé el primero en publicar algo!</h2>
-        {% endif %}
+    <span>
+        <a href="{% url 'post_index' %}">Ver todos</a> 
+        <a href="{% url 'post_create' %}"><i class="fa-regular fa-square-plus" alt="nuevo_post"></i></a>
+    </span>
+    <ul>
+        {% for post in page_obj %}
+            <li>
+                <h2>{{post.title}}</h2>
+                <p>{{post.description|truncatechars:20}}</p>
+                <span>
+                    <a href="{% url 'post_view' id=post.id%}">Ver</a>
+                </span>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1&search={{ search_query }}">Primero</a>
+                <a href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">Anterior</a>
+            {% endif %}
+    
+            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search_query }}">Último</a>
+            {% endif %}
+        </span>
     </div>
+    
 {% endblock %}

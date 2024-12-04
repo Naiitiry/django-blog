@@ -3,15 +3,22 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .models import Post
 from .forms import PostForm
 
 
 @login_required
 def index(request):
-    posts=Post.objects.filter(is_deleted=False,title__contains=request.GET.get('search',''))
+    search_query = request.GET.get('search', '')
+    posts = Post.objects.filter(is_deleted=False, title__contains=search_query)
+
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context={
-        'posts':posts
+        'page_obj':page_obj,
+        'search_query':search_query
     }
     return render(request,'post/post_index.html',context)
 

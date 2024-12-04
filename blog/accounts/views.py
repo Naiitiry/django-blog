@@ -1,9 +1,14 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import RegisterForm
+from post.models import Post
+
+#################################################################################
+#                    LOGIN - REGISTER - LOGOUT                                  #
+#################################################################################
 
 def register_user(request):
     if request.method=='GET':
@@ -65,3 +70,25 @@ def logout_view(request):
     messages.success(request, 'Sesión cerrada con éxito.')
     return redirect('login')
 
+#################################################################################
+#                                   USUARIOS                                    #
+#################################################################################
+
+@login_required
+def user_detail(request,user_id=None):
+    if user_id:
+        user_profile = get_object_or_404(User,id=user_id)
+    else:
+        user_profile=request.user
+    
+    is_owner = request.user == user_profile
+    is_admin = request.user.groups.filter(name='Admin').exists()
+
+    user_posts = user_profile.posts.filter(is_deleted=False)
+    context={
+        'user_profile':user_profile,
+        'user_post':user_posts,
+        'is_owner':is_owner,
+        'is_admin':is_admin,
+    }
+    return render(request,'accounts/detail.html',context)

@@ -9,7 +9,8 @@
         <h1>Título</h1>
     </div>
     <div class="dropdown">
-        <a href="#">Información</a>
+        <p>Detalle del usuario</p>
+        <a href="{% url 'user_profile' %}"><i class="fa-regular fa-circle-user"></i></a>
         <a href="#">Dashboard</a>
         <a href="{% url 'logout' %}">Desconectar</a>
     </div>

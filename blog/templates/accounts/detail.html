@@ -1,0 +1,30 @@
+{% extends 'layout/session/base_session.html' %}
+
+{% block 'content' %}
+    <h1>
+        Perfil de usuario
+    </h1>
+    <div>
+        {% if is_owner or is_admin %}
+            <h2>{{ user_profile.username }}</h2>
+            <p>Email: {{ user_profile.email }}</p>
+            <p>Fecha de registro: {{ user_profile.date_joined }}</p>
+        {% else %}
+            <h2>{{ user_profile.username }}</h2>
+        {% endif %}
+            <h3>Publicaciones</h3>
+        {% if user_post %}
+            <ul>
+                {% for post in user_post %}
+                    <li>
+                        <h4>{{ post.title }}</h4>
+                        <p>{{ post.description|truncatechars:30 }}</p>
+                        <a href="{% url 'post_view' id=post.id %}">Ver publicación</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No hay Publicaciones</p>
+        {% endif %}
+    </div>
+{% endblock %}
