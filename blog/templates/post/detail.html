@@ -1,18 +1,18 @@
 {% extends 'layout/base.html' %}
 
 {% block 'content' %}
-    <h1>{{post.title}}</h1>
+    <h1>Detalles del post</h1>
     <span><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
-    <ul>
-        <li>{{post.title}}</li>
-        <li>{{post.description}}</li>
-        <li>{{post.created_at}}</li>
-        <li>{{post.updated_at}}</li>
-        <li>{{post.user.username}}</li>
-        <li>{{post.category.name}}</li>
-        <span>
-            <a href="{% url 'post_edit' id=post.id %}"><i class="fa-regular fa-pen-to-square"></i></a>
-            <a href="{% url 'post_delete' id=post.id %}"><i class="fa-solid fa-trash-can"></i></a>
+    <ul class="detail">
+        <li><b>Titulo:</b> {{post.title}}</li>
+        <li><b>Descripción:</b> {{post.description}}</li>
+        <li><b>Creado:</b> {{post.created_at}}</li>
+        <li><b>Última actualización:</b> {{post.updated_at}}</li>
+        <li><b>Creado por:</b> {{post.user.username}}</li>
+        <li><b>Categoría:</b> {{post.category.name}}</li>
+        <span class="detail-icon">
+            <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>
+            <a href="{% url 'post_delete' id=post.id %}" class="detail-icon-trash"><i class="fa-solid fa-trash-can"></i></a>
         </span>
     </ul>
     

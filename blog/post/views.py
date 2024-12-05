@@ -13,7 +13,7 @@ def index(request):
     search_query = request.GET.get('search', '')
     posts = Post.objects.filter(is_deleted=False, title__contains=search_query)
 
-    paginator = Paginator(posts, 5)
+    paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     context={

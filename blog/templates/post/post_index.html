@@ -7,9 +7,9 @@
         <a href="{% url 'post_index' %}">Ver todos</a> 
         <a href="{% url 'post_create' %}"><i class="fa-regular fa-square-plus" alt="nuevo_post"></i></a>
     </span>
-    <ul>
+    <ul class="view">
         {% for post in page_obj %}
-            <li>
+            <li class="block">
                 <h2>{{post.title}}</h2>
                 <p>{{post.description|truncatechars:20}}</p>
                 <span>
