@@ -1,15 +1,22 @@
 {% extends 'layout/base_session.html' %}
-{% load static %}
+
 {% block 'title' %}Iniciar sesión{% endblock %}
 
 {% block 'content' %}
     <h1>Iniciar sesión</h1>
     <form action="{% url 'login' %}" method="POST" class="form-session">
         {% csrf_token %}
-        <table class="form-table">
-            <input type="text" name="username" placeholder="Usuario">
-            <input type="password" name="password" placeholder="Contraseña">
-        </table>
+        <div class="form-group">
+            {% for field in form_log%}
+                <div class="form-field">
+                    {{field.label_tag}}
+                    {{field}}
+                    {% if field.error %}
+                        <p class="form-error">{{field.error}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
         <button type="submit" class="btn-send">Iniciar sesión</button>
     </form>
 

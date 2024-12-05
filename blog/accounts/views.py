@@ -23,47 +23,35 @@ def register_user(request):
             form.save()
             messages.success(request,'Usuario registrado con éxito.')
             return redirect('login')#redirige a la página principal/index.
-        """
-        username = request.POST['username']
-        email = request.POST['email']
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
-
-        if password != confirm_password:
-            messages.error(request, 'Las contraseñas no coinciden.')
-            return redirect('register')
-        
-        if User.objects.filter(username=username).exists():
-            messages.error(request,'El nombre de usuario ya está en uso.')
-            return redirect('register')
-        
-        if User.objects.filter(email=email).exists():
-            messages.error(request,'El correo ya registrado.')
-            return redirect('register')
-        
-        user = User(username=username, email=email)
-        user.set_password(password)
-        user.save()
-
-        messages.success(request,'Usuario registrado con éxito.')
-        """
     return render(request,'accounts/register.html',{'form':form})
 
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request,user)
-            messages.success(request,'Credenciales válidas.')
-            return  redirect('post_index')
+    if request.method == 'GET':
+        form_log=LoginForm()
+        context={
+            'form_log':form_log
+        }
+        return render(request,'accounts/login.html',context)
+    elif request.method == 'POST':
+        form_log=LoginForm(request.POST)
+        if form_log.is_valid():
+            username=form_log.cleaned_data['username']
+            password=form_log.cleaned_data['password']
+            user=authenticate(request,username=username,password=password)
+            if user is not None:
+                login(request,user)
+                messages.success(request,f'Bienvenido {username}')
+                return redirect('post_index')
+            else:
+                messages.error(request,'Credenciales inválidas.')
         else:
-            messages.error(request,'Credenciales inválidas.')
-            return redirect('login')
-    return render(request,'accounts/login.html',{})
+            messages.error(request,'Datos erroneos, ingresa usuario y/o contraseña correctamente.')
+        context = {
+                'form_log': form_log
+            }
+        return render(request,'accounts/login.html',context)
+    elif request.user.is_authenticated:
+        return redirect('post_index')
 
 def logout_view(request):
     logout(request)

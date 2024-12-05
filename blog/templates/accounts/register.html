@@ -6,9 +6,17 @@
     <h1>Registrarse</h1>
     <form action="{% url 'register' %}" method="POST" class="form-session">
         {% csrf_token %}
-        <table class="form-table">
-            {{form.as_table}}
-        </table>
+        <div class="form-group">
+            {% for field in form %}
+                <div class="form-field">
+                    {{field.label_tag}}
+                    {{field}}
+                    {% if field.error %}
+                        <p class="form-error">{{field.error}}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
         <button type="submit" class="btn-send">Registrarse</button>
     </form>
 

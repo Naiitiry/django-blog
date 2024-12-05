@@ -26,27 +26,37 @@ main{
     padding: 50px;
     justify-content: flex-start;
     align-items: center;
+    background-color: var(--color-primary);
+
 }
 nav{
     background-color: var(--color-secondary);
 }
-input{
+input, select, textarea {
     outline: none;
     box-shadow: none;
     border: 1px solid var(--color-tertiary);
-    padding: 5px;
+    padding: 10px;
     width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 form{
     background-color: #876533;
-    padding: 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
-.form-table{
-    list-style: none;
-    width: 100%;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
 }
 .btn-send{
     width: 100%;
@@ -56,8 +66,22 @@ form{
     border: 0;
     text-transform: uppercase;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
 }
 .btn-send:hover{
     background-color: white;
     color: var(--color-secondary);
+}
+.form-error {
+    color: red;
+    font-size: 14px;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
 }
