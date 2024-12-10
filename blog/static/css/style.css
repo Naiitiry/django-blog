@@ -42,7 +42,10 @@ nav a{
     color: white;
 }
 nav a:hover{
-    color: red;
+    color: rgb(211, 57, 57);
+}
+.user-icon{
+    font-size: 35px;
 }
 .nav-link{
     display: flex;
@@ -87,6 +90,29 @@ nav a:hover{
     animation-range: entry 0% cover 40%;
 }
 
+.detail-account{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    text-decoration: none;
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+}
+.detail-account a{
+    text-decoration: none;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+.detail-account a:hover{
+    background-color: rgb(156, 156, 214);
+}
+.detail-account li{
+    border: 1px solid black;
+    border-radius: 5px;
+    color: #000;
+    padding: 10px;
+}
 .detail{
     display: flex;
     flex-direction: column;
@@ -122,7 +148,7 @@ nav a:hover{
 input, select, textarea {
     outline: none;
     box-shadow: none;
-    border: 1px solid var(--color-tertiary);
+    border: 1px solid;
     padding: 10px;
     width: 100%;
     font-size: 16px;
@@ -130,7 +156,6 @@ input, select, textarea {
 }
 
 form{
-    background-color: #876533;
     padding: 20px;
     display: flex;
     flex-direction: column;
