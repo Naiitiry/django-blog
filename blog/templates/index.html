@@ -1,12 +1,23 @@
-{% extends 'layout/session/base_session.html' %}
+{% extends 'layout/base_session.html' %}
 
 {% block 'title' %}Inicio{% endblock %}
 
 {% block 'content' %}
-    <h1>Bienvenido</h1>
-    <p>Por favor elija una opción</p>
-    <div class="cards">
-        <a href="{%  url 'login' %}">Iniciar sesión</a>
-        <a href="{% url 'register' %}">Registrarse</a>
-    </div>
+
+    {% if user.is_authenticated %}
+        <h1>Hola {{user.username}}</h1>
+        <p>¿Quieres salir o volver a la página principal?</p>
+        <div>
+            <a href="{% url 'post_index' %}">Home</a>
+            <a href="{% url 'logout' %}">Desconectarse</a>
+        </div>
+    {% else %}
+        <h1>Bienvenido</h1>
+        <p>Por favor elija una opción</p>
+        <div class="cards">
+            <a href="{% url 'login' %}">Iniciar sesión</a>
+            <a href="{% url 'register' %}">Registrarse</a>
+        </div>
+    {% endif %}
+
 {% endblock %}

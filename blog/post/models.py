@@ -9,6 +9,12 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name=models.CharField(max_length=20,null=False,blank=False,unique=True)
+
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     title=models.CharField(max_length=100,null=False,blank=False)
     description=models.TextField(null=False,blank=False)
@@ -18,6 +24,7 @@ class Post(models.Model):
     
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='posts')
+    tag=models.ForeignKey(Tag,on_delete=models.CASCADE,related_name='posts',null=True)
     
     def __str__(self):
         return self.title
@@ -32,8 +39,3 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment
-
-class Tag(models.Model):
-    name=models.CharField(max_length=20,null=False,blank=False)
-
-    post=models.ManyToManyField(Post)

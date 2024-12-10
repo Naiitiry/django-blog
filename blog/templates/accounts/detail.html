@@ -1,9 +1,10 @@
-{% extends 'layout/base_session.html' %}
+{% extends 'layout/base.html' %}
 
 {% block 'content' %}
     <h1>
         Perfil de usuario
     </h1>
+    <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
     <div>
         {% if is_owner or is_admin %}
             <h2>{{ user_profile.username }}</h2>

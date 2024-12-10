@@ -110,8 +110,14 @@ nav a:hover{
     color: #000;
     font-size: 50px;
 }
-.detail-icon a:hover{
-    color: var(--color-tertiary);
+.detail-icon-edit:hover{
+    color: rgb(117, 167, 42);
+}
+.detail-icon-trash:hover{
+    color: rgb(182, 22, 22);
+}
+.return_post_index{
+    font-size: 35px;
 }
 input, select, textarea {
     outline: none;

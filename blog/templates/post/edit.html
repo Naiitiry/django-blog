@@ -11,7 +11,7 @@
     </ul>
     {% endif %}
 
-    <span><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
+    <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
     <form action="{% url 'post_edit' id=id %}" method="POST">
         {% csrf_token %}
         <table>

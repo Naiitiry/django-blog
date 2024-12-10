@@ -2,7 +2,7 @@
 
 {% block 'content' %}
     <h1>Detalles del post</h1>
-    <span><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
+    <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
     <ul class="detail">
         <li><b>Titulo:</b> {{post.title}}</li>
         <li><b>Descripción:</b> {{post.description}}</li>
