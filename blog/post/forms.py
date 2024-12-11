@@ -9,7 +9,7 @@ class PostForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model=Comment
-        exclude=('comment_date',)
+        fields=['comment']
 
 class Tag(ModelForm):
     model=Tag
