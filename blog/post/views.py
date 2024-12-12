@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Post, Comment
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 
 @login_required
@@ -92,19 +92,19 @@ def delete(request,id):
 def add_comment(request,id):
     post = get_object_or_404(Post,id=id)
     if request.method == 'POST':
-        comment_text = request.POST.get('comment')  # Capturamos el texto del formulario
+        comment_text = request.POST.get('comment')
         if comment_text:
             comment = Comment.objects.create(
                 comment=comment_text,
                 post=post,
-                user=request.user   # Usuario autenticado
+                user=request.user,
             )
-            return redirect('post_detail',id=post.id)
-    return render(request,'post/post_detail.html',{'post':post})
+            return redirect('post_view',id=post.id)
+    return render(request,'post/detail.html',{'post':post})
 
 @login_required
-def edit_comment(request,id):
-    comment = get_object_or_404(Comment, id=id)
+def edit_comment(request,comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
     if request.user != comment.user:
         return HttpResponseForbidden(f"{request.user.username} no tienes permisos para editar este comentario.")
     if request.method == 'POST':
@@ -112,12 +112,12 @@ def edit_comment(request,id):
         if next_text:
             comment.comment = next_text
             comment.save()
-            return redirect('post_detal',id=comment.post.id)
+            return redirect('post_view',id=comment.post.id)
     return render(request,'edit_comment.html',{'comment':comment})
 
 @login_required
-def delete_comment(request,id):
-    comment = get_object_or_404(Comment,id=id)
+def delete_comment(request,comment_id):
+    comment = get_object_or_404(Comment,id=comment_id)
     if request.user != comment.user:
         return HttpResponseForbidden(f"{request.user.username} no tienes permisos para eliminar este comentario.")
     comment.is_deleted=True

@@ -16,7 +16,24 @@
         </span>
     </ul>
     <div class="comments">
-        
+        <h2>Comentarios</h2>
+        <ul>
+            {% for comment in comments %}
+                <li>
+                    <strong>{{ comment.user.username }}</strong>: {{ comment.comment }}
+                    <a href="#">Editar</a>
+                    <a href="#">Eliminar</a>
+                </li>
+                {% empty %}
+                <li>No hay comentarios aún.</li>
+            {% endfor %}
+        </ul>
     </div>
-    
+    <div>
+        <form action="{% url 'add_comment' id=post.id%}" method="POST">
+            {% csrf_token %}
+            <textarea name="comment"></textarea>
+            <button type="submit">Comentar</button>
+        </form>
+    </div>
 {% endblock %}
