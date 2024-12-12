@@ -21,8 +21,14 @@
             {% for comment in comments %}
                 <li>
                     <strong>{{ comment.user.username }}</strong>: {{ comment.comment }}
-                    <a href="#">Editar</a>
-                    <a href="#">Eliminar</a>
+                    <form id="edit-form-{{ comment.id }}" action="{% url 'edit_comment' comment.id %}" method="POST" class="edit-form">
+                        {% csrf_token %}
+                        <textarea name="comment">{{ comment.comment }}</textarea>
+                        <button type="submit">Guardar</button>
+                        <a href="#comment-{{ comment.id }}">Cancelar</a>
+                    </form>
+                    <a href="#edit-form-{{ comment.id }}" class="btn-edit">Editar</a>
+                    <a href="{% url 'delete_comment' comment.id %}">Eliminar</a>
                 </li>
                 {% empty %}
                 <li>No hay comentarios aún.</li>

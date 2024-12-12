@@ -190,6 +190,14 @@ form{
     font-size: 14px;
 }
 
+.edit-form {
+    display: none;
+}
+
+.edit-form:target {
+    display: block;
+}
+
 footer{
     display: grid;
     grid-template-columns: auto auto auto;

@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseForbidden
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -99,27 +98,33 @@ def add_comment(request,id):
                 post=post,
                 user=request.user,
             )
-            return redirect('post_view',id=post.id)
-    return render(request,'post/detail.html',{'post':post})
+    return redirect('post_view',id=post.id)
 
 @login_required
-def edit_comment(request,comment_id):
-    comment = get_object_or_404(Comment, id=comment_id)
+def edit_comment(request,id):
+    comment = get_object_or_404(Comment, id=id)
+
     if request.user != comment.user:
-        return HttpResponseForbidden(f"{request.user.username} no tienes permisos para editar este comentario.")
+        return redirect('post_view',id=comment.post.id)
+    
     if request.method == 'POST':
         next_text = request.POST.get('comment')
         if next_text:
             comment.comment = next_text
             comment.save()
-            return redirect('post_view',id=comment.post.id)
-    return render(request,'edit_comment.html',{'comment':comment})
+    context = {
+        'post': comment.post,
+        'comment': comment
+    }
+    return redirect('post_view',id=comment.post.id)
 
 @login_required
-def delete_comment(request,comment_id):
-    comment = get_object_or_404(Comment,id=comment_id)
-    if request.user != comment.user:
-        return HttpResponseForbidden(f"{request.user.username} no tienes permisos para eliminar este comentario.")
-    comment.is_deleted=True
-    comment.save()
-    return redirect('post_detail',id=comment.post.id)
+def delete_comment(request,id):
+    comment = get_object_or_404(Comment,id=id)
+    if request.user == comment.user or request.user.is_staff:
+        comment.is_deleted=True
+        comment.save()
+        messages.success(request,'Comentario eliminado con éxito!')
+    else:
+        messages.error(request,'No se pudo eliminar el comentario.')
+    return redirect('post_view',id=comment.post.id)

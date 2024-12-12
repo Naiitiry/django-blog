@@ -8,7 +8,7 @@ urlpatterns = [
     path('delete/<int:id>',views.delete,name='post_delete'),
     path('create/',views.create,name='post_create'),
     path('view/<int:id>/add_comment/',views.add_comment,name='add_comment'),
-    #path('edit_comment/<int:id>',views.edit_comment,name='edit_comment'),
-    #path('delete_coment/<int:id>',views.delete_comment,name='delete_comment'),
+    path('edit_comment/<int:id>/',views.edit_comment,name='edit_comment'),
+    path('delete_coment/<int:id>/',views.delete_comment,name='delete_comment'),
     
 ]
