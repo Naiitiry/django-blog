@@ -116,10 +116,15 @@ nav a:hover{
 .detail{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: start;
+    justify-content:space-around;
+    justify-items: center;
     text-decoration: none;
+    text-align: center;
     list-style: none;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 30px 10px 30px 10px;
 }
 .detail-icon{
     display: flex;
@@ -129,6 +134,29 @@ nav a:hover{
     padding: 15px;
     gap: 20px;
     width: 100%;
+}
+.detail-content-info{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid black;
+    border-radius: 15px;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+}
+.detail-content-description{
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    width: 100%;
+    max-width: 100%;
 }
 .detail-icon a{
     list-style: none;

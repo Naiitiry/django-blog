@@ -136,7 +136,17 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+"""
+Configuramos rutas del login
+"""
 LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/'       # Redirección tras iniciar sesión
 LOGOUT_REDIRECT_URL = '/'
+
+
+"""
+Configuramos la duración de las sesiones, tanto de usuarios como admins y superusuarios
+"""
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True #Cierra las sesiones de todos una vez cerrado el navegador/pestaña.
+SESSION_COOKIE_AGE = 18000 #30 minutos de duración
+

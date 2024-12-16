@@ -3,18 +3,25 @@
 {% block 'content' %}
     <h1>Detalles del post</h1>
     <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
-    <ul class="detail">
-        <li><b>Titulo:</b> {{post.title}}</li>
-        <li><b>Descripción:</b> {{post.description}}</li>
-        <li><b>Creado:</b> {{post.created_at}}</li>
-        <li><b>Última actualización:</b> {{post.updated_at}}</li>
-        <li><b>Creado por:</b> {{post.user.username}}</li>
-        <li><b>Categoría:</b> {{post.category.name}}</li>
-        <span class="detail-icon">
-            <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>
-            <a href="{% url 'post_delete' id=post.id %}" class="detail-icon-trash"><i class="fa-solid fa-trash-can"></i></a>
-        </span>
-    </ul>
+    <div class="detail">
+        <div class="detail-content">
+            <p>{{post.title}}</p>
+            <p class="detail-content-description">
+                {{post.description}}
+            </p>
+            <div class="detail-content-info">
+                <p>Creado: {{post.created_at}}</p>
+                <p>Actualizado: {{post.updated_at}}</p>
+                <p>Creador por: {{post.user.username}}</p>
+                <p>Categoría: {{post.category.name}}</p>
+                <p>Tag: {{post.tag.name}}</p>
+            </div>
+        </div>
+    </div>
+    <span class="detail-icon">
+        <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>
+        <a href="{% url 'post_delete' id=post.id %}" class="detail-icon-trash"><i class="fa-solid fa-trash-can"></i></a>
+    </span>
     <div class="comments">
         <h2>Comentarios</h2>
         <ul>
