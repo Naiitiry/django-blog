@@ -1,7 +1,7 @@
 :root{
-    --color-primary:#fbe9e7 ;
-    --color-secondary:#876533;
-    --color-tertiary:#ff8800;
+    --color-primary:#c2c2c2 ;
+    --color-secondary:#9e8c71;
+    --color-tertiary:#8a8683;
     --font-main: serif;
     --font-text:'Courier New', Courier, monospace;
 }
@@ -224,6 +224,30 @@ form{
 
 .edit-form:target {
     display: block;
+}
+
+.base_session{
+    background-image:url('../img/desktop_freepik.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.base_session_content{
+    background-color: rgba(255,255,255,0.5);
+    backdrop-filter: blur(10px);
+    width: 300px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
 }
 
 footer{

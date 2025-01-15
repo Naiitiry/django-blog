@@ -3,6 +3,7 @@
 {% block 'title' %}Registrarse{% endblock %}
 
 {% block 'content' %}
+<div class="base_session_content">
     <h1>Registrarse</h1>
     <form action="{% url 'register' %}" method="POST" class="form-session">
         {% csrf_token %}
@@ -25,5 +26,6 @@
     {% for message in messages %}
         <p>{{ message }}</p>
     {% endfor %}
+</div>
 
 {% endblock %}
