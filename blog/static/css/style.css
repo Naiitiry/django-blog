@@ -40,13 +40,58 @@ nav a{
     list-style: none;
     text-decoration: none;
     color: white;
+    transition: .5s;
 }
 nav a:hover{
     color: rgb(211, 57, 57);
 }
 .user-icon{
     font-size: 35px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    transition: .5s;
 }
+.user-icon:hover{
+    color: crimson;
+}
+#mypopover{
+    background: #333;
+    border: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    inset: auto;
+    height: 100dvh;
+    box-shadow: 0 0 25px 25px rgba(0, 0, 0, .1);
+    width: 250px;
+    translate: 100% 0;
+    transition: translate 2s ease-in-out;
+}
+#mypopover:popover-open{
+    translate: 0 0;
+}
+.mypopover-elements{
+    display: flex;
+    flex-direction: column;
+    h3{
+        color: white;
+        
+        padding: 5px 0 5px 10px;
+    }
+    a{
+        padding: 5px 0 0 10px;
+    }
+    button{
+        margin: 30px 0 0 0;
+    }
+}
+
 .nav-link{
     display: flex;
     justify-content: space-around;
@@ -89,10 +134,16 @@ nav a:hover{
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
 }
-
+.detail-detail{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+}
 .detail-account{
-    display:grid;
-    grid-template-columns: auto auto auto;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     text-decoration: none;
     list-style: none;
@@ -101,7 +152,7 @@ nav a:hover{
 }
 .detail-account a{
     text-decoration: none;
-    margin-right: 10px;
+    margin:10px 5px 0 0;
     border-radius: 5px;
 }
 .detail-account a:hover{
@@ -218,7 +269,6 @@ form{
     text-decoration: none;
     list-style: none;
 }
-
 .edit-form:target {
     display: block;
 }
@@ -275,7 +325,7 @@ form{
 .cards a{
     list-style: none;
     text-decoration: none;
-    color: #000;
+    color: #fff;
     font-size: 30px;
     transition: color 0.5s;
     font-weight: bold;

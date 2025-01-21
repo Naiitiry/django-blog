@@ -5,8 +5,21 @@
     <div>
         <h1>Garolfa</h1>
     </div>
+    <button class="user-icon" popovertarget="mypopover">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    <div id="mypopover" popover="auto">
+        <div class="mypopover-elements">
+            <h3>Menú</h3>
+            <a href="{% url 'user_profile' %}">Perfil</a>
+            <a href="{% url 'logout' %}">Desconectar</a>
+            <button popovertarget="mypopover" aria-label="Cerrar menú">
+                Cerrar menú
+            </button>
+        </div>
+    </div>
+<!-- 
     <div class="dropdown">
         <a href="{% url 'user_profile' %}" class="user-icon"><i class="fa-regular fa-circle-user"></i></a>
-        <a href="{% url 'logout' %}">Desconectar</a>
-    </div>
+    </div> -->
 </nav>

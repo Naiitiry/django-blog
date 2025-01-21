@@ -1,6 +1,9 @@
 {% extends 'layout/base.html' %}
 
 {% block 'content' %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
     <h1>Publicaciones</h1>
     {% include 'post/partials/search.html' %}
     <span>
