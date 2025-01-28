@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Count
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
@@ -11,7 +12,9 @@ from .forms import PostForm, CommentForm
 @login_required
 def index(request):
     search_query = request.GET.get('search', '')
-    posts = Post.objects.filter(is_deleted=False, title__contains=search_query)
+    posts = (Post.objects.filter(is_deleted=False, title__contains=search_query)
+            .annotate(comment_count=Count('comments'))
+            )
 
     paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
@@ -26,6 +29,7 @@ def index(request):
 def view(request,id):
     post=Post.objects.get(id=id)
     comments=post.comments.filter(is_deleted=False)
+    
     context={
         'post':post,
         'comments':comments

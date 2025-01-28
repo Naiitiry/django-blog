@@ -13,13 +13,11 @@
     
     <ul class="view">
         {% for post in page_obj %}
-            <li class="block">
+            <a href="{% url 'post_view' id=post.id%}" class="block">
                 <h2>{{post.title}}</h2>
                 <p>{{post.description|truncatechars:20}}</p>
-                <span>
-                    <a href="{% url 'post_view' id=post.id%}">Ver</a>
-                </span>
-            </li>
+                <p>Comentarios: {{post.comment_count}}</p>
+            </a>
         {% endfor %}
     </ul>
     
