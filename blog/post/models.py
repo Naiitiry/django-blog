@@ -21,6 +21,8 @@ class Post(models.Model):
     created_at=models.DateField(auto_now_add=True)
     updated_at=models.DateField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
+    total_likes = models.IntegerField(default=0,blank=True)
+    total_dislikes = models.IntegerField(default=0,blank=True)
     
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='posts')
@@ -28,6 +30,15 @@ class Post(models.Model):
     
     def __str__(self):
         return self.title
+
+class Like(models.Model):
+
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,null=True)
+    value = models.IntegerField(choices=[(1,'Like'),(-1,'Dislike')],null=True)
+
+    class Meta:
+        unique_together = ('user', 'post')  # Evita que el usuario vote más de una vez
 
 class Comment(models.Model):
     comment=models.TextField(null=False,blank=False)

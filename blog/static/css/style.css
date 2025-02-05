@@ -10,6 +10,7 @@
     font-weight: 300;
     font-style: normal;
     font-size: 60px;
+    color: #bebebe;
 }
 
 *{
@@ -105,24 +106,38 @@ nav a:hover{
 }
 .view{
     width: 100%;
+    text-decoration: none;
     display: flex;
     align-items: center;
     flex-direction: column;
 }
+.view a{
+    color: #222121;
+}
 .block {
-    height: 200px;
+    height: 100px;
     width: 100%;
     list-style: none;
-    margin: 2px 0 5px 0;
+    margin: 0 0 10px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-bottom: solid green;
 }
 .block:hover{
-    background-color: #bebebe;
+    background-color: #868686;
     width: 100%;
+}
+.block-count-comments{
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.block-count-comments p{
+    background-color: white;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .detail-detail{

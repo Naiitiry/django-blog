@@ -16,8 +16,16 @@
             <a href="{% url 'post_view' id=post.id%}" class="block">
                 <h2>{{post.title}}</h2>
                 <p>{{post.description|truncatechars:20}}</p>
-                <p>Comentarios: {{post.comment_count}}</p>
             </a>
+            <div>
+                <div class="block-count-comments">
+                    <p>Up</p>
+                    <p>Down</p>
+                </div>
+                <div>
+                    <p>{{post.comment_count}}</p>
+                </div>
+            </div>
         {% endfor %}
     </ul>
     

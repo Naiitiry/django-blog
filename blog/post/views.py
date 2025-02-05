@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Count
-from .models import Post, Comment
+from .models import Post, Comment, Like
 from .forms import PostForm, CommentForm
 
 
@@ -15,7 +15,6 @@ def index(request):
     posts = (Post.objects.filter(is_deleted=False, title__contains=search_query)
             .annotate(comment_count=Count('comments'))
             )
-
     paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -26,13 +25,51 @@ def index(request):
     return render(request,'post/post_index.html',context)
 
 @login_required
+def like_post(request,id,value):
+
+    post = get_object_or_404(Post,id=id)
+    user=request.user
+
+    existing_like = Like.objects.filter(post=post, user=user).first()
+
+    if existing_like:
+        # Si ya tiene una reacción y hace clic en la misma, la elimina (quita su like/dislike)
+        if existing_like.value == value:
+            if value == 1:
+                post.total_likes -= 1
+            else:
+                post.total_dislikes -= 1
+            existing_like.delete()
+        else:
+            # Si cambia de Like a Dislike o viceversa
+            if value == 1:
+                post.total_likes += 1
+                post.total_dislikes -= 1
+            else:
+                post.total_dislikes += 1
+                post.total_likes -= 1
+            existing_like.value = value
+            existing_like.save()
+    else:
+        # Si no tiene una reacción previa, la agrega
+        Like.objects.create(post=post, user=user, value=value)
+        if value == 1:
+            post.total_likes += 1
+        else:
+            post.total_dislikes += 1
+
+    post.save()
+
+    return redirect('post_view',id=post.id)
+
+@login_required
 def view(request,id):
     post=Post.objects.get(id=id)
     comments=post.comments.filter(is_deleted=False)
-    
+        
     context={
         'post':post,
-        'comments':comments
+        'comments':comments,
     }
     return render(request,'post/detail.html',context)
 
