@@ -27,38 +27,18 @@ def index(request):
 @login_required
 def like_post(request,id,value):
 
-    post = get_object_or_404(Post,id=id)
+    post = Post.objects.filter(is_deleted=False).annotate(like_count=Count('posts'))
     user=request.user
-
     existing_like = Like.objects.filter(post=post, user=user).first()
 
     if existing_like:
-        # Si ya tiene una reacción y hace clic en la misma, la elimina (quita su like/dislike)
         if existing_like.value == value:
-            if value == 1:
-                post.total_likes -= 1
-            else:
-                post.total_dislikes -= 1
-            existing_like.delete()
+            existing_like.delete()  # Si el usuario vuelve a hacer clic, se elimina su reacción
         else:
-            # Si cambia de Like a Dislike o viceversa
-            if value == 1:
-                post.total_likes += 1
-                post.total_dislikes -= 1
-            else:
-                post.total_dislikes += 1
-                post.total_likes -= 1
-            existing_like.value = value
+            existing_like.value = value  # Si cambia de Like a Dislike, se actualiza
             existing_like.save()
     else:
-        # Si no tiene una reacción previa, la agrega
-        Like.objects.create(post=post, user=user, value=value)
-        if value == 1:
-            post.total_likes += 1
-        else:
-            post.total_dislikes += 1
-
-    post.save()
+        Like.objects.create(post=post, user=user, value=value)  # Nuevo Like/Dislike
 
     return redirect('post_view',id=post.id)
 
