@@ -21,27 +21,24 @@ class Post(models.Model):
     created_at=models.DateField(auto_now_add=True)
     updated_at=models.DateField(auto_now=True)
     is_deleted = models.BooleanField(default=False)
-    
+
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='posts')
     tag=models.ForeignKey(Tag,on_delete=models.CASCADE,related_name='posts',null=True)
 
-    def total_likes(self):
-        return self.likes.filter(value=1).count()  # Filtra los Likes
-
-    def total_dislikes(self):
-        return self.likes.filter(value=-1).count()  # Filtra los Dislikes
+    # Seguimiento de likes
+    def numero_de_likes(self):
+        return Like.objects.filter(post=self).count()
 
     def __str__(self):
         return self.title
 
 class Like(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="likes")
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    value = models.IntegerField(choices=[(1, 'Like'), (-1, 'Dislike')])  # +1 = Like, -1 = Dislike
-
-    class Meta:
-        unique_together = ('post', 'user')  # Evita duplicados de un mismo usuario en un post
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name='likes')
+    
+    class Mete:
+        unique_together = ('user','post') # Evita duplicados
 
 class Comment(models.Model):
     comment=models.TextField(null=False,blank=False)

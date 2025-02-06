@@ -21,10 +21,10 @@
         </div>
     </div>
     <div>
-        <a href="{% url 'like_post' post.id %}" method="POST">Like</a>
-        <p>{{ post.total_likes }}</p>
-        <a href="{% url 'like_post' post.id %}" method="POST">Dislike</a>
-        <p>{{ post.total_dislikes }}</p>
+        <p>{{post.numero_de_likes}} - Likes</p>
+        <a href="{% url 'post_like' post.id %}">Like</a>
+        <a>Dislike</a>
+        <p></p>
     </div>
     <span class="detail-icon">
         <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>

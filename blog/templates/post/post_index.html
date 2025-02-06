@@ -6,10 +6,10 @@
     {% endfor %}
     <h1>Publicaciones</h1>
     {% include 'post/partials/search.html' %}
-    <span>
+    <div class="view-create">
         <a href="{% url 'post_index' %}">Ver todos</a> 
-        <a href="{% url 'post_create' %}"><i class="fa-regular fa-square-plus" alt="nuevo_post"></i></a>
-    </span>
+        <a href="{% url 'post_create' %}">Crear post</a>
+    </div >
     
     <ul class="view">
         {% for post in page_obj %}
@@ -18,12 +18,11 @@
                 <p>{{post.description|truncatechars:20}}</p>
             </a>
             <div>
-                <div class="block-count-comments">
-                    <p>Like</p>
-                    <p>Dislike</p>
+                <div class="block-count-comments col-11">
+                    <p>like</p>
                 </div>
                 <div>
-                    <p>{{post.comment_count}}</p>
+                    <p>{{post.comment_count}} - Comentarios</p>
                 </div>
             </div>
         {% endfor %}

@@ -25,28 +25,20 @@ def index(request):
     return render(request,'post/post_index.html',context)
 
 @login_required
-def like_post(request,id,value):
+def post_like(request,id):
+    post=get_object_or_404(Post,id=id)
+    like = Like.objects.filter(user=request.user, post=post).first()
 
-    post = Post.objects.filter(is_deleted=False).annotate(like_count=Count('posts'))
-    user=request.user
-    existing_like = Like.objects.filter(post=post, user=user).first()
-
-    if existing_like:
-        if existing_like.value == value:
-            existing_like.delete()  # Si el usuario vuelve a hacer clic, se elimina su reacción
-        else:
-            existing_like.value = value  # Si cambia de Like a Dislike, se actualiza
-            existing_like.save()
+    if like:
+        like.delete()  # Si ya tiene un like, lo elimina
     else:
-        Like.objects.create(post=post, user=user, value=value)  # Nuevo Like/Dislike
-
-    return redirect('post_view',id=post.id)
+        Like.objects.create(user=request.user, post=post)  # Si no tiene like, lo agrega
+    return redirect('detail',id=post.id)
 
 @login_required
 def view(request,id):
     post=Post.objects.get(id=id)
     comments=post.comments.filter(is_deleted=False)
-        
     context={
         'post':post,
         'comments':comments,
