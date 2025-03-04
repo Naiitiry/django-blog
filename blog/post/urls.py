@@ -10,6 +10,6 @@ urlpatterns = [
     path('view/<int:id>/add_comment/',views.add_comment,name='add_comment'),
     path('edit_comment/<int:id>/',views.edit_comment,name='edit_comment'),
     path('delete_coment/<int:id>/',views.delete_comment,name='delete_comment'),
-    path('view/<int:id>/post_like/',views.post_like,name='post_like'),
-
+    path('post_like/<int:id>',views.post_like,name='post_like'),
+    
 ]

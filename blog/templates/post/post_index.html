@@ -18,8 +18,19 @@
                 <p>{{post.description|truncatechars:20}}</p>
             </a>
             <div>
-                <div class="block-count-comments col-11">
-                    <p>like</p>
+                <div class="col-11">
+                    {{ post.title }}<br/>
+                    <small class="text-muted">
+                        ({{ post.created_at }}) By @{{ post.user.username }}
+                        - {{ post.numero_de_likes }} Me gusta - 
+
+                        {% if user in post.likes.all %}
+                        <a href="{% url 'post_like' post.id %}">No me gusta</a>
+                        {% else %}
+                        <a href="{% url 'post_like' post.id %}">Me gusta</a>
+                        {% endif %}
+                        
+                    </small>
                 </div>
                 <div>
                     <p>{{post.comment_count}} - Comentarios</p>

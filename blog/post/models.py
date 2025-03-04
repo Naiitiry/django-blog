@@ -25,20 +25,17 @@ class Post(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='posts')
     tag=models.ForeignKey(Tag,on_delete=models.CASCADE,related_name='posts',null=True)
+    likes = models.ManyToManyField(User, related_name='post_like',blank=True)
 
-    # Seguimiento de likes
     def numero_de_likes(self):
-        return Like.objects.filter(post=self).count()
+        return self.likes.count()
 
     def __str__(self):
-        return self.title
-
-class Like(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name='likes')
-    
-    class Mete:
-        unique_together = ('user','post') # Evita duplicados
+        return (
+            f'{self.title} '
+            f'({self.created_at:%Y-%m-%d %H:%M}): '
+            f'{self.description}...'
+        )
 
 class Comment(models.Model):
     comment=models.TextField(null=False,blank=False)

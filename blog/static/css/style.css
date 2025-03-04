@@ -1,5 +1,5 @@
 :root{
-    --color-primary:#c2c2c2 ;
+    --color-primary:#ffffff ;
     --color-secondary:#9e8c71;
     --color-tertiary:#8a8683;
     --font-main: serif;
@@ -147,17 +147,6 @@ nav a:hover{
 .block:hover{
     background-color: #868686;
     width: 100%;
-}
-.block-count-comments{
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.block-count-comments p{
-    background-color: white;
-    padding: 10px;
-    border-radius: 15px;
 }
 
 .detail-detail{

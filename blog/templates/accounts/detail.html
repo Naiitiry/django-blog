@@ -2,12 +2,11 @@
 
 {% block 'content' %}
     <h1>
-        Perfil de usuario
+        Perfil de {{ user_profile.username }}
     </h1>
     <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
     <div class="detail-detail">
         {% if is_owner or is_admin %}
-            <h2>{{ user_profile.username }}</h2>
             <p>Email: {{ user_profile.email }}</p>
             <p>Fecha de registro: {{ user_profile.date_joined }}</p>
         {% else %}

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.db.models import Count
-from .models import Post, Comment, Like
+from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
 
@@ -23,17 +23,6 @@ def index(request):
         'search_query':search_query
     }
     return render(request,'post/post_index.html',context)
-
-@login_required
-def post_like(request,id):
-    post=get_object_or_404(Post,id=id)
-    like = Like.objects.filter(user=request.user, post=post).first()
-
-    if like:
-        like.delete()  # Si ya tiene un like, lo elimina
-    else:
-        Like.objects.create(user=request.user, post=post)  # Si no tiene like, lo agrega
-    return redirect('detail',id=post.id)
 
 @login_required
 def view(request,id):
@@ -141,3 +130,18 @@ def delete_comment(request,id):
     else:
         messages.error(request,'No se pudo eliminar el comentario.')
     return redirect('post_view',id=comment.post.id)
+
+###################################################################
+#                            LIKES                                #
+###################################################################
+
+
+@login_required
+def post_like(request,id):
+    post = get_object_or_404(Post,id=id)
+    if post.likes.filter(id=request.user.id):
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+
+    return redirect('post_index')
