@@ -7,24 +7,33 @@
     </div>
     <div class="detail">
         <div class="detail-content">
-            <p>{{post.title}}</p>
+            <h2>{{post.title}}</h2>
             <p class="detail-content-description">
                 {{post.description}}
             </p>
+            <small class="text-muted">
+                Creado: {{post.created_at}} - 
+                Actualizado: {{post.updated_at}}<br/>
+                Creador por: {{post.user.username}} - 
+                Categoría: {{post.category.name}} - 
+                Tag: {{post.tag.name}}
+            </small>
             <div class="detail-content-info">
-                <p>Creado: {{post.created_at}}</p>
-                <p>Actualizado: {{post.updated_at}}</p>
-                <p>Creador por: {{post.user.username}}</p>
-                <p>Categoría: {{post.category.name}}</p>
-                <p>Tag: {{post.tag.name}}</p>
+                
             </div>
         </div>
     </div>
     <div>
-        <p> - Likes</p>
-        <a href="">Like</a>
-        <a>Dislike</a>
-        <p></p>
+        <small class="text-muted">
+            {{ post.numero_de_likes }} Me gusta - 
+
+            {% if user in post.likes.all %}
+            <a href="{% url 'post_like' post.id %}">No me gusta</a>
+            {% else %}
+            <a href="{% url 'post_like' post.id %}">Me gusta</a>
+            {% endif %}
+
+        </small>
     </div>
     <span class="detail-icon">
         <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>
@@ -34,8 +43,10 @@
         <h2>Comentarios</h2>
         <ul>
             {% for comment in comments %}
-                <li>
-                    <strong>{{ comment.user.username }}</strong>: {{ comment.comment }}
+                <li class="comments-list">
+                    <div class="comments-list-comment">
+                        <h3>{{ comment.user.username }}:</h3>{{ comment.comment }}
+                    </div>
                     <form id="edit-form-{{ comment.id }}" action="{% url 'edit_comment' comment.id %}" method="POST" class="edit-form">
                         {% csrf_token %}
                         <div>
@@ -44,8 +55,10 @@
                             <a href="#comment-{{ comment.id }}">Cancelar</a>
                         </div>
                     </form>
-                    <a href="#edit-form-{{ comment.id }}" >Editar</a>
-                    <a href="{% url 'delete_comment' comment.id %}" >Eliminar</a>
+                    <small class="text-muted">
+                        <a href="#edit-form-{{ comment.id }}" >Editar</a>
+                        <a href="{% url 'delete_comment' comment.id %}" >Eliminar</a>
+                    </small>
                 </li>
                 {% empty %}
                 <li>No hay comentarios aún.</li>

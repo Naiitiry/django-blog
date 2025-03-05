@@ -34,7 +34,7 @@ main{
     align-items: center;
     background-color: var(--color-primary);
     min-width: 85vh;
-    min-height: 100vh;
+    min-height: 90vh;
 }
 nav{
     background-color: var(--color-secondary);
@@ -132,7 +132,7 @@ nav a:hover{
     color: #222121;
 }
 .pagination{
-    margin: 45px 0 0 0;
+    margin: 15px 0 0 0;
 }
 .block {
     height: 100px;
@@ -143,10 +143,16 @@ nav a:hover{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 15px;
 }
 .block:hover{
-    background-color: #868686;
-    width: 100%;
+    background-color: #b8b7b7;
+}
+.block a{
+    text-align: center;
+}
+.block a:hover{
+    text-decoration: underline;
 }
 
 .detail-detail{
@@ -292,20 +298,32 @@ form{
     display: flex;
     align-items: center;
     flex-direction: column;
+    max-width: 50%;
 }
-.comments ul,a{
+.comments ul{
     list-style: none;
     text-decoration: none;
+    padding: 15px 0 0 0;
 }
 .comments a{
     font-size: 15px;
-    font-weight: bold;
     padding: 0 0 0 10px;
     color: #000;
     transition: 0.5s;
 }
 .comments a:hover{
     color: #ff8800;
+}
+.comments-list{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: center;
+    width: 100%;
+    margin: 15px 0 0 0;
+    .comments-list-comment{
+        text-overflow: ellipsis;
+    }
 }
 
 .base_session{
@@ -357,4 +375,5 @@ footer{
     grid-template-columns: auto auto auto;
     width: 100%;
     padding: 10px;
+    background-color: var(--color-secondary);
 }

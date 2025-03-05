@@ -11,15 +11,17 @@
         <a href="{% url 'post_create' %}">Crear post</a>
     </div >
     
-    <ul class="view">
+    <div class="view">
         {% for post in page_obj %}
-            <a href="{% url 'post_view' id=post.id%}" class="block">
+            <!-- <a href="{% url 'post_view' id=post.id%}" class="block">
                 <h2>{{post.title}}</h2>
                 <p>{{post.description|truncatechars:20}}</p>
-            </a>
-            <div>
+            </a> -->
+            <div class="block">
                 <div class="col-11">
-                    {{ post.title }}<br/>
+                    <a href="{% url 'post_view' id=post.id %}">
+                        <h2>{{ post.title }}</h2>
+                    </a>
                     <small class="text-muted">
                         ({{ post.created_at }}) By @{{ post.user.username }}
                         - {{ post.numero_de_likes }} Me gusta - 
@@ -33,11 +35,15 @@
                     </small>
                 </div>
                 <div>
-                    <p>{{post.comment_count}} - Comentarios</p>
+                    {% if post.comment_count == 1 %}
+                        <p>{{post.comment_count}} - Comentario</p>
+                    {% elif post.comment_count <= 1 or post.comment_count >= 1 %}
+                        <p>{{post.comment_count}} - Comentarios</p>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
-    </ul>
+    </div>
     
     <div class="pagination">
         <span class="step-links">
