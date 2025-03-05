@@ -1,9 +1,13 @@
 {% extends 'layout/base.html' %}
 
 {% block 'content' %}
-    <div>
+    <div class="header-content-post">
+        <div class="return_post_index">
+            <a href="{% url 'post_index' %}">
+                <i class="fa-solid fa-circle-left"></i>
+            </a>
+        </div>
         <h1>Detalles del post</h1>
-        <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
     </div>
     <div class="detail">
         <div class="detail-content">
