@@ -36,7 +36,12 @@ def view(request,id):
 
 @login_required
 def edit(request,id):
-    post=Post.objects.get(id=id)
+    post=get_object_or_404(Post,id=id)
+
+    if request.user != post.user:
+        messages.error(request,'No tienes los permisos para modificar el post.')
+        return redirect('post_view',id=post.id)
+
     if request.method == 'GET':
         form=PostForm(instance=post)
         context={
@@ -55,6 +60,7 @@ def edit(request,id):
         messages.success(request,'Post actualizado con éxito.')
         return render(request,'post/edit.html',context)
     
+    
 @login_required
 def create(request):
     if request.method == 'POST':
@@ -62,11 +68,13 @@ def create(request):
         if form.is_valid():
             form.instance.user = request.user
             form.save()
+            messages.success(request,"Post creado con éxito!")
             return redirect('post_index')
         else:
             context={
                 'form':form
             }
+            messages.error(request,"Error al crear el post.")
             return render(request,'post/create.html',context)
     else:
         form=PostForm()

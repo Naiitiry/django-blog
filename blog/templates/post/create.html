@@ -6,14 +6,6 @@
 
     <h1>Creación de nuevo post</h1>
 
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="alert-success"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
     <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
     <form action="{% url 'post_create' %}" method="POST">
         {% csrf_token %}
@@ -23,4 +15,11 @@
         <input type="submit" value="Enviar" >
     </form>
 
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="alert-success"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}

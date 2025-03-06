@@ -18,5 +18,27 @@
     </main>
         {% include 'layout/partials/footer.html' %}
     <script src="https://kit.fontawesome.com/bf1e8130c0.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        // Si hay mensajes en el modal, abrirlo automáticamente
+        if ($("#modal-body .alert").length > 0) {
+        $("#messageModal").fadeIn();
+        }
+
+        // Cerrar el modal al hacer clic en la "X"
+        $(".close").click(function () {
+        $("#messageModal").fadeOut();
+        });
+
+        // Cerrar el modal si se hace clic fuera de él
+        $(window).click(function (e) {
+        if ($(e.target).is("#messageModal")) {
+            $("#messageModal").fadeOut();
+        }
+        });
+    });
+    </script>
+
 </body>
 </html>

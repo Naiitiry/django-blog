@@ -312,6 +312,7 @@ form{
     list-style: none;
     text-decoration: none;
     padding: 15px 0 0 0;
+    width: 100%;
 }
 .comments a{
     font-size: 15px;
@@ -327,10 +328,17 @@ form{
     flex-direction: column;
     align-items:flex-start;
     justify-content: center;
-    width: 100%;
+    width: 80%;
     margin: 15px 0 0 0;
     .comments-list-comment{
-        text-overflow: ellipsis;
+        display: flex;
+        flex-direction: column;
+        align-items:start;
+        justify-content: start;
+    }
+    .comments-list-comment p{
+        max-width: 100%;
+        text-wrap: wrap;
     }
 }
 

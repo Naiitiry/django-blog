@@ -38,18 +38,21 @@
             {% endif %}
 
         </small>
+
     </div>
     <span class="detail-icon">
         <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>
         <a href="{% url 'post_delete' id=post.id %}" class="detail-icon-trash"><i class="fa-solid fa-trash-can"></i></a>
     </span>
+
     <div class="comments">
         <h2>Comentarios</h2>
         <ul>
             {% for comment in comments %}
                 <li class="comments-list">
                     <div class="comments-list-comment">
-                        <h3>{{ comment.user.username }}:</h3>{{ comment.comment }}
+                        <h3>{{ comment.user.username }}:</h3>
+                        <p>{{ comment.comment }}</p>
                     </div>
                     <form id="edit-form-{{ comment.id }}" action="{% url 'edit_comment' comment.id %}" method="POST" class="edit-form">
                         {% csrf_token %}
