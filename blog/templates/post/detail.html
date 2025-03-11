@@ -2,11 +2,6 @@
 
 {% block 'content' %}
     <div class="header-content-post">
-        <div class="return_post_index">
-            <a href="{% url 'post_index' %}">
-                <i class="fa-solid fa-circle-left"></i>
-            </a>
-        </div>
         <h1>Detalles del post</h1>
     </div>
     <div class="detail">
@@ -40,10 +35,10 @@
         </small>
 
     </div>
-    <span class="detail-icon">
-        <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit"><i class="fa-regular fa-pen-to-square"></i></a>
-        <a href="{% url 'post_delete' id=post.id %}" class="detail-icon-trash"><i class="fa-solid fa-trash-can"></i></a>
-    </span>
+    <small class="detail-icon">
+        <a href="{% url 'post_edit' id=post.id %}" class="detail-icon-edit">Editar</a>
+        <a href="{% url 'post_delete' id=post.id %}" class="detail-icon-trash">Eliminar</a>
+    </small>
 
     <div class="comments">
         <h2>Comentarios</h2>
@@ -62,10 +57,12 @@
                             <a href="#comment-{{ comment.id }}">Cancelar</a>
                         </div>
                     </form>
-                    <small class="text-muted">
-                        <a href="#edit-form-{{ comment.id }}" >Editar</a>
-                        <a href="{% url 'delete_comment' comment.id %}" >Eliminar</a>
-                    </small>
+                    {% if request.user == comment.user %}
+                        <small class="text-muted">
+                            <a href="#edit-form-{{ comment.id }}" >Editar</a>
+                            <a href="{% url 'delete_comment' comment.id %}" >Eliminar</a>
+                        </small>
+                    {% endif %}
                 </li>
                 {% empty %}
                 <li>No hay comentarios aún.</li>

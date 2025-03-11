@@ -1,0 +1,16 @@
+<!-- Modal Personalizado -->
+<div id="messageModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-body">
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-danger
+                                {% elif message.tags == 'success' %}alert-success
+                                {% elif message.tags == 'warning' %}alert-warning
+                                {% else %}alert-info{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div> 

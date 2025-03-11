@@ -1,19 +1,19 @@
 <nav>
     <div class="nav-links">
-        <a href="#">Inicio</a>
+        <a href="{% url 'post_index' %}">Inicio</a>
     </div>
     <div>
         <h1>Garolfa</h1>
     </div>
-    <button class="user-icon" popovertarget="mypopover">
+    <button class="user-icon" id="toggleMenu">
         <i class="fa-solid fa-bars"></i>
     </button>
-    <div id="mypopover" popover="auto">
-        <div class="mypopover-elements">
+    <div id="menu" class="menu hidden">
+        <div class="menu-elements">
             <h3>Menú</h3>
             <a href="{% url 'user_profile' %}">Perfil</a>
             <a href="{% url 'logout' %}">Desconectar</a>
-            <button popovertarget="mypopover" aria-label="Cerrar menú">
+            <button id="closeMenu">
                 Cerrar menú
             </button>
         </div>

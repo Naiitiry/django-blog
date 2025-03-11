@@ -14,6 +14,7 @@ def index(request):
     search_query = request.GET.get('search', '')
     posts = (Post.objects.filter(is_deleted=False, title__contains=search_query)
             .annotate(comment_count=Count('comments'))
+            .order_by('-id') #Ordenar de mayor a menor
             )
     paginator = Paginator(posts, 6)
     page_number = request.GET.get('page')
@@ -115,6 +116,7 @@ def edit_comment(request,id):
     comment = get_object_or_404(Comment, id=id)
 
     if request.user != comment.user:
+        messages.error(request,'No tienes los permisos para modificar este comentario.')
         return redirect('post_view',id=comment.post.id)
     
     if request.method == 'POST':
@@ -152,4 +154,4 @@ def post_like(request,id):
     else:
         post.likes.add(request.user)
 
-    return redirect('post_index')
+    return redirect('post_index', id=post.id)
