@@ -13,13 +13,10 @@
             <small class="text-muted">
                 Creado: {{post.created_at}} - 
                 Actualizado: {{post.updated_at}}<br/>
-                Creador por: {{post.user.username}} - 
+                Creador por: <a href="{% url 'user_detail' user_id=post.user.id %}">@{{post.user.username}}</a> - 
                 Categoría: {{post.category.name}} - 
                 Tag: {{post.tag.name}}
             </small>
-            <div class="detail-content-info">
-                
-            </div>
         </div>
     </div>
     <div>
@@ -58,7 +55,7 @@
                         </div>
                     </form>
                     {% if request.user == comment.user %}
-                        <small class="text-muted">
+                        <small class="edition text-muted">
                             <a href="#edit-form-{{ comment.id }}" >Editar</a>
                             <a href="{% url 'delete_comment' comment.id %}" >Eliminar</a>
                         </small>

@@ -11,11 +11,8 @@
     <div id="menu" class="menu hidden">
         <div class="menu-elements">
             <h3>Menú</h3>
-            <a href="{% url 'user_profile' %}">Perfil</a>
+            <a href="{% url 'user_detail' user_id=user.id %}">Perfil</a>
             <a href="{% url 'logout' %}">Desconectar</a>
-            <button id="closeMenu">
-                Cerrar menú
-            </button>
         </div>
     </div>
 </nav>

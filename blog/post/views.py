@@ -145,7 +145,6 @@ def delete_comment(request,id):
 #                            LIKES                                #
 ###################################################################
 
-
 @login_required
 def post_like(request,id):
     post = get_object_or_404(Post,id=id)
@@ -154,4 +153,4 @@ def post_like(request,id):
     else:
         post.likes.add(request.user)
 
-    return redirect('post_index', id=post.id)
+    return redirect('post_index')

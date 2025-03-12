@@ -62,14 +62,12 @@ def logout_view(request):
 #################################################################################
 
 @login_required
-def user_detail(request,user_id=None):
-    if user_id:
-        user_profile = get_object_or_404(User,id=user_id)
-    else:
-        user_profile=request.user
+def user_detail(request,user_id):
+    user_profile = get_object_or_404(User,id=user_id)
+    
     
     is_owner = request.user == user_profile
-    is_admin = request.user.groups.filter(name='Admin').exists()
+    is_admin = request.user.is_superuser
 
     user_posts = user_profile.posts.filter(is_deleted=False)
     context={

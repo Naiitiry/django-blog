@@ -19,10 +19,9 @@
                     <a href="{% url 'post_view' id=post.id %}">
                         <li>
                             <h4>{{ post.title }}</h4>
-                            <p>{{ post.description|truncatechars:30 }}</p>
+                            <p>{{ post.description|truncatechars:20 }}</p>
                         </li>
                     </a>
-                    
                 {% endfor %}
             </ul>
         {% else %}

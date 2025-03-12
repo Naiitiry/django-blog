@@ -24,12 +24,12 @@
     $(document).ready(function () {
         // Si hay mensajes en el modal, abrirlo automáticamente
         if ($("#modal-body .alert").length > 0) {
-        $("#messageModal").fadeIn();
+            $("#messageModal").fadeIn();
         }
 
         // Cerrar el modal al hacer clic en la "X"
         $(".close").click(function () {
-        $("#messageModal").fadeOut();
+            $("#messageModal").fadeOut();
         });
 
         // Cerrar el modal si se hace clic fuera de él
@@ -43,11 +43,6 @@
         $("#toggleMenu").click(function() {
             $("#menu").toggleClass("show");
         });
-
-        $("#closeMenu").click(function() {
-            $("#menu").removeClass("show");
-        });
-
         // Cerrar el menú si se hace clic fuera
         $(document).click(function(event) {
             if (!$(event.target).closest("#menu, #toggleMenu").length) {
