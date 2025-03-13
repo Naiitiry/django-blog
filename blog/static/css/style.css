@@ -29,19 +29,18 @@ main{
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 30px;
-    justify-content: flex-start;
+    padding: 10px 0;
+    justify-content: center;
     align-items: center;
     background-color: var(--color-primary);
-    min-width: 85vh;
-    min-height: 90vh;
+
 }
 nav{
     background-color: var(--color-secondary);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+
 }
 nav a{
     list-style: none;
@@ -79,6 +78,13 @@ nav a:hover{
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     transition: right 0.3s ease-in-out;
+    .menu-elements{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: start;
+        flex-wrap: wrap;
+    }
 }
 .menu.show {
     right: 20px; /* Se muestra deslizándose */
@@ -95,22 +101,26 @@ nav a:hover{
     flex-direction: row;
     justify-content: space-between;
     width: 30%;
+    a{
+        color: #000;
+        font-size: 15px;
+        text-decoration: none;
+        text-align: center;
+        color: #222121;
+        transition: 0.5s;
+    }
+    a:hover{
+        background: conic-gradient(grey);
+    }
 }
-.view-create a{
-    font-size: 25px;
-    text-decoration: none;
-    color: #222121;
-    transition: 1s;
-}
-.view-create a:hover{
-    color:blue;
-    text-decoration: underline;
-}
+
+
 .view{
-    width: 100%;
+    width: 60%;
     text-decoration: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
 }
 .view a{
@@ -120,15 +130,23 @@ nav a:hover{
     margin: 15px 0 0 0;
 }
 .block {
-    height: 100px;
     width: 100%;
     list-style: none;
-    margin: 0 0 10px 0;
+    margin: 0 0 20px 0;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 15px;
+    .block-reactions{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
 }
 .block:hover{
     background-color: #b8b7b7;
@@ -213,9 +231,7 @@ nav a:hover{
 .detail-icon-trash:hover{
     color: rgb(182, 22, 22);
 }
-.return_post_index{
-    font-size: 35px;
-}
+
 .header-content-post{
     display:flex;
     flex-direction: column;
@@ -368,21 +384,26 @@ form{
 }
 
 footer{
-    display: grid;
-    grid-template-columns: auto auto auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: start;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     gap: 10px;
     background-color: var(--color-secondary);
 }
 .footer-social-media{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     .footer-social-media-icons{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        padding: 10px;
+        padding: 5px;
         width: 100%;
         align-items: center;
         justify-content: space-around;
@@ -390,7 +411,7 @@ footer{
     a{
         position: relative;
         font-size: 40px;
-        padding: 10px;
+        padding: 5px;
         text-decoration: none;
         background-clip: text;
         color: #fff;

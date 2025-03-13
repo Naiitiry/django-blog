@@ -1,10 +1,15 @@
 {% extends 'layout/base.html' %}
 
 {% block 'content' %}
-    <h1>
-        Perfil de {{ user_profile.username }}
-    </h1>
-    <span class="return_post_index"><a href="{% url 'post_index' %}"><i class="fa-solid fa-circle-left"></i></a></span>
+    <div class="header-detail">
+        <h1>
+            Perfil de {{ user_profile.username }}
+        </h1>
+        <small">
+            <a href="{% url 'post_index' %}">Atrás</a>
+        </small>
+    </div>
+    
     <div class="detail-detail">
         {% if is_owner or is_admin %}
             <p>Email: {{ user_profile.email }}</p>

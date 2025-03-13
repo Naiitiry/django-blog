@@ -4,16 +4,16 @@
     <h1>Publicaciones</h1>
     {% include 'post/partials/search.html' %}
     <div class="view-create">
-        <a href="{% url 'post_index' %}">Ver todos</a> 
-        <a href="{% url 'post_create' %}">Crear post</a>
+        <a href="{% url 'post_create' %}">
+            <div>
+                <i class="fa-solid fa-plus"></i>
+                <p>Crear</p>
+            </div>
+        </a>
     </div >
     
     <div class="view">
         {% for post in page_obj %}
-            <!-- <a href="{% url 'post_view' id=post.id%}" class="block">
-                <h2>{{post.title}}</h2>
-                <p>{{post.description|truncatechars:20}}</p>
-            </a> -->
             <div class="block">
                 <div class="col-11">
                     <a href="{% url 'post_view' id=post.id %}">
@@ -21,23 +21,26 @@
                     </a>
                     <small class="text-muted">
                         ({{ post.created_at }}) By @{{ post.user.username }}
-                        - {{ post.numero_de_likes }} Me gusta - 
-
-                        {% if user in post.likes.all %}
-                        <a href="{% url 'post_like' post.id %}">No me gusta</a>
-                        {% else %}
-                        <a href="{% url 'post_like' post.id %}">Me gusta</a>
-                        {% endif %}
-                        
                     </small>
                 </div>
-                <div>
-                    {% if post.comment_count == 1 %}
-                        <p>{{post.comment_count}} - Comentario</p>
-                    {% elif post.comment_count <= 1 or post.comment_count >= 1 %}
-                        <p>{{post.comment_count}} - Comentarios</p>
+                <small class="block-reactions">
+                    {{ post.numero_de_likes }} Me gusta 
+                    {% if user in post.likes.all %}
+                        <a href="{% url 'post_like' post.id %}">
+                            <i class="fa-solid fa-heart" style="color: red;"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'post_like' post.id %}">
+                            <i class="fa-regular fa-heart" style="color: red;"></i>
+                        </a>
                     {% endif %}
-                </div>
+                    
+                    {% if post.comment_count == 1 %}
+                        <p>{{post.comment_count}} <i class="fa-regular fa-comment-dots"></i></p>
+                    {% elif post.comment_count <= 1 or post.comment_count >= 1 %}
+                        <p>{{post.comment_count}} <i class="fa-regular fa-comment-dots"></i></p>
+                    {% endif %}
+                </small>
             </div>
         {% endfor %}
     </div>
@@ -46,13 +49,13 @@
         <span class="step-links">
             {% if page_obj.has_previous %}
                 <a href="?page=1&search={{ search_query }}">Primero</a>
+                <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
                 <a href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">Anterior</a>
             {% endif %}
-    
-            <span>Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-    
+
             {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">Siguiente</a>
+                <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
                 <a href="?page={{ page_obj.paginator.num_pages }}&search={{ search_query }}">Último</a>
             {% endif %}
         </span>
