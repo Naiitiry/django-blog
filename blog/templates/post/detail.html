@@ -22,14 +22,16 @@
     </div>
     <div>
         <small class="text-muted">
-            {{ post.numero_de_likes }} Me gusta - 
-
-            {% if user in post.likes.all %}
-            <a href="{% url 'post_like' post.id %}">No me gusta</a>
-            {% else %}
-            <a href="{% url 'post_like' post.id %}">Me gusta</a>
-            {% endif %}
-
+            {{ post.numero_de_likes }} Me gusta 
+                    {% if user in post.likes.all %}
+                        <a href="{% url 'post_like_inpost' id=post.id %}">
+                            <i class="fa-solid fa-heart" style="color: red;"></i>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'post_like_inpost' id=post.id %}">
+                            <i class="fa-regular fa-heart" style="color: red;"></i>
+                        </a>
+                    {% endif %}
         </small>
 
     </div>
@@ -68,7 +70,7 @@
         </ul>
     </div>
     <div>
-        <form action="{% url 'add_comment' id=post.id%}" method="POST">
+        <form action="{% url 'add_comment' id=post.id%}" method="POST" class="form-comment">
             {% csrf_token %}
             <textarea name="comment" cols="60" rows="3"></textarea>
             <button type="submit">Comentar</button>

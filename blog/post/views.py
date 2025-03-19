@@ -152,5 +152,13 @@ def post_like(request,id):
         post.likes.remove(request.user)
     else:
         post.likes.add(request.user)
-
     return redirect('post_index')
+
+@login_required
+def post_like_inpost(request,id):
+    post = get_object_or_404(Post,id=id)
+    if post.likes.filter(id=request.user.id):
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    return redirect('post_view',id=post.id)

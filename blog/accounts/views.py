@@ -65,7 +65,6 @@ def logout_view(request):
 def user_detail(request,user_id):
     user_profile = get_object_or_404(User,id=user_id)
     
-    
     is_owner = request.user == user_profile
     is_admin = request.user.is_superuser
 

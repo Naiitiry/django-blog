@@ -1,36 +1,38 @@
 {% extends 'layout/base.html' %}
 
 {% block 'content' %}
-    <div class="header-detail">
-        <h1>
-            Perfil de {{ user_profile.username }}
-        </h1>
-        <small">
-            <a href="{% url 'post_index' %}">Atrás</a>
-        </small>
-    </div>
-    
-    <div class="detail-detail">
-        {% if is_owner or is_admin %}
-            <p>Email: {{ user_profile.email }}</p>
-            <p>Fecha de registro: {{ user_profile.date_joined }}</p>
-        {% else %}
-            <h2>{{ user_profile.username }}</h2>
-        {% endif %}
-            <h3>Publicaciones</h3>
-        {% if user_post %}
-            <ul class="detail-account">
-                {% for post in user_post %}
-                    <a href="{% url 'post_view' id=post.id %}">
-                        <li>
-                            <h4>{{ post.title }}</h4>
-                            <p>{{ post.description|truncatechars:20 }}</p>
-                        </li>
-                    </a>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No hay Publicaciones</p>
-        {% endif %}
+    <div class="detail-profile">
+        <div class="detail-header">
+            <p>
+                <a href="{% url 'post_index' %}">Atrás</a>
+            </p>
+            <h1>
+                Perfil de {{ user_profile.username }}
+            </h1>
+        </div>
+        
+        <div class="detail-detail">
+            {% if is_owner or is_admin %}
+                <p>Email: {{ user_profile.email }}</p>
+                <p>Fecha de registro: {{ user_profile.date_joined }}</p>
+            {% else %}
+                <h2>{{ user_profile.username }}</h2>
+            {% endif %}
+                <h3>Publicaciones</h3>
+            {% if user_post %}
+                <ul class="detail-account">
+                    {% for post in user_post %}
+                        <a href="{% url 'post_view' id=post.id %}">
+                            <li>
+                                <h4>{{ post.title }}</h4>
+                                <p>{{ post.description|truncatechars:15 }}</p>
+                            </li>
+                        </a>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No hay Publicaciones</p>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
