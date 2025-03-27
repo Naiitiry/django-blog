@@ -10,7 +10,7 @@
     font-weight: 300;
     font-style: normal;
     font-size: 60px;
-    color: #bebebe;
+    color:rgb(0, 0, 0);
 }
 
 *{
@@ -389,7 +389,7 @@ form{
 }
 
 .base_session{
-    background-color: #004085;
+    background-color:#8baed3;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -426,7 +426,7 @@ form{
     font-weight: bold;
 }
 .cards a:nth-child(1):hover{
-    color: red;
+    color:crimson;
 }
 .cards a:nth-child(2):hover{
     color: orange;
