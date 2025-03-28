@@ -1,6 +1,7 @@
 {% extends 'layout/base.html' %}
 
 {% block 'content' %}
+<div class="post-index">
     <h1>Publicaciones</h1>
     {% include 'post/partials/search.html' %}
     <div class="view-create">
@@ -15,7 +16,7 @@
     <div class="view">
         {% for post in page_obj %}
             <div class="block">
-                <div class="col-11">
+                <div class="block-post">
                     <a href="{% url 'post_view' id=post.id %}">
                         <h2>{{ post.title }}</h2>
                     </a>
@@ -52,7 +53,6 @@
                 <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
                 <a href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}">Anterior</a>
             {% endif %}
-
             {% if page_obj.has_next %}
                 <a href="?page={{ page_obj.next_page_number }}&search={{ search_query }}">Siguiente</a>
                 <span>{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
@@ -60,5 +60,5 @@
             {% endif %}
         </span>
     </div>
-    
+</div>
 {% endblock %}

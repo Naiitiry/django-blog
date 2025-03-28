@@ -97,6 +97,13 @@ nav a:hover{
     justify-content: space-around;
     align-items: center;
 }
+.post-index{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
 
 .view-create{
     display: flex;
@@ -119,21 +126,23 @@ nav a:hover{
         border-radius: 50%;
     }
 }
-
-
 .view{
-    width: 60%;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    align-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 0 20px 0;
 }
 .view a{
     color: #222121;
 }
 .pagination{
-    margin: 15px 0 0 0;
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 20px 0;
 }
 .block {
     width: 100%;
@@ -439,6 +448,7 @@ footer{
     justify-content: space-around;
     align-items: start;
     width: 100%;
+    height: 100%;
     padding: 5px;
     gap: 10px;
     background-color: var(--color-secondary);
